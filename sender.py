@@ -22,17 +22,19 @@ print("[+] Terhubung.\n")
 # Kirim informasi file (nama + ukuran)
 client_socket.send(f"{filename}{SEPARATOR}{filesize}".encode())
 
-start_time = time.time()
-sent_size = 0
-
+# Konfigurasi Progress Bar
 progress = tqdm.tqdm(
     total=filesize, 
     desc=f"Mengirim {os.path.basename(filename)}", 
     unit="B", 
     unit_scale=True, 
     unit_divisor=1024,
-    leave=True
+    leave=True,
+    bar_format="{l_bar}{bar} {n_fmt}/{total_fmt} ({rate_fmt})"
 )
+
+start_time = time.time()
+sent_size = 0
 
 with open(filename, "rb") as f:
     while sent_size < filesize:

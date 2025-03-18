@@ -5,9 +5,8 @@ app = Flask(__name__)
 
 DATA_FOLDER = "data"
 
-@app.route("/files", methods=["GET"])
+@app.route("/", methods=["GET"])
 def list_files():
-    """Mengembalikan daftar file yang ada di folder 'data'"""
     if not os.path.exists(DATA_FOLDER):
         return jsonify({"files": []}), 404
 

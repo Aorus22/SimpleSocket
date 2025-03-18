@@ -51,15 +51,18 @@ while not shutdown_flag:
         filesize = int(filesize)
         filepath = os.path.join(DATA_FOLDER, filename)
 
-        # Proses menerima file
+        # Konfigurasi Progress Bar
         progress = tqdm.tqdm(
             total=filesize,
             desc=f"Menerima {filename}",
             unit="B",
             unit_scale=True,
-            unit_divisor=1024
+            unit_divisor=1024,
+            leave=True,
+            bar_format="{l_bar}{bar} {n_fmt}/{total_fmt} ({rate_fmt})"
         )
 
+        # Proses menerima file
         with open(filepath, "wb") as f:
             while True:
                 if shutdown_flag:
